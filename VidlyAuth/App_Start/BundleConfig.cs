@@ -24,8 +24,20 @@ namespace VidlyAuth
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      //"~/Content/bootstrap.css",
+                      //"~/Content/site.css"
+                      "~/Content/materializecss/custom.css"
+                      ));
+
+
+            // Materializecss bundles
+            bundles.Add(new StyleBundle("~/Content/materializecss").Include(
+                    "~/Content/materializecss/css/materialize.min.css"
+                ));
+
+            bundles.Add(new ScriptBundle("~/bundles/materializecss").Include(
+                    "~/Content/materializecss/js/materialize.min.js"
+                ));
         }
     }
 }
