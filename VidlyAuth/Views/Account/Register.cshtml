@@ -15,7 +15,22 @@
             <div class="card-content">
                 <span class="card-title">Create a new account.</span>
                 <div class="row">
-                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                    @*@Html.ValidationSummary("", new { @class = "text-danger" })*@
+                    <div class="input-field col s12">
+                        @Html.LabelFor(m => m.FirstName, new { @class = "validate" })
+                        @Html.TextBoxFor(m => m.FirstName, new { @id = "input_name", data_length = "255" })
+                        @Html.ValidationMessageFor(m => m.FirstName)
+                    </div>
+                    <div class="input-field col s12">
+                        @Html.LabelFor(m => m.LastName, new { @class = "validate" })
+                        @Html.TextBoxFor(m => m.LastName, new { @id = "input_surname", data_length = "255" })
+                        @Html.ValidationMessageFor(m => m.LastName)
+                    </div>
+                    <div class="input-field col s12">
+                        @Html.LabelFor(m => m.Birthdate, new { @class = "validate" })
+                        @Html.TextBoxFor(m => m.Birthdate, new { @class = "datepicker" })
+                        @Html.ValidationMessageFor(m => m.Birthdate)
+                    </div>
                     <div class="input-field col s12">
                         @Html.LabelFor(m => m.Email, new { @class = "validate" })
                         @Html.TextBoxFor(m => m.Email)
@@ -78,4 +93,16 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(function () {
+            $('input#input_name').characterCounter();
+            $('input#input_surname').characterCounter();
+            M.Datepicker.init(document.querySelector('.datepicker'), {
+                firstDay: 1,
+                format: 'dd mmmm yyyy',
+                yearRange: 120
+            });
+        });
+    </script>
 }

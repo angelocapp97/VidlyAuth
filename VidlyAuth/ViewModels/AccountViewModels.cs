@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace VidlyAuth.Models
@@ -68,6 +69,22 @@ namespace VidlyAuth.Models
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [Display(Name = "Name")]
+        [Required(ErrorMessage = "Please, insert your name.")]
+        [StringLength(255, ErrorMessage = "Name can not have more than 255 characters.")]
+        public string FirstName { get; set; }
+
+        [Display(Name = "Surname")]
+        [Required(ErrorMessage = "Please, insert your surname.")]
+        [StringLength(255, ErrorMessage = "Surname can not have more than 255 characters.")]
+        public string LastName { get; set; }
+
+        [Display(Name = "Date of Birth")]
+        [Required(ErrorMessage = "Please, insert your date of birth")]
+        [DataType(DataType.Date, ErrorMessage = "Please enter a valid date format.")]
+        [CustomDateTimeValid]
+        public DateTime Birthdate { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]

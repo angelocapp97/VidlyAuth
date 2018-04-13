@@ -200,7 +200,12 @@
     <Compile Include="Migrations\201804130821132_InitialMigration.Designer.cs">
       <DependentUpon>201804130821132_InitialMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804131304540_AddMoreUserInfo.cs" />
+    <Compile Include="Migrations\201804131304540_AddMoreUserInfo.Designer.cs">
+      <DependentUpon>201804131304540_AddMoreUserInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\CustomDateTimeValid.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
@@ -302,6 +307,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201804130821132_InitialMigration.resx">
       <DependentUpon>201804130821132_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804131304540_AddMoreUserInfo.resx">
+      <DependentUpon>201804131304540_AddMoreUserInfo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
