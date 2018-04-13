@@ -21,7 +21,7 @@ namespace VidlyAuth.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("VidlyAuthDb", throwIfV1Schema: false)
         {
         }
 
