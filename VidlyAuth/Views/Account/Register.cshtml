@@ -15,7 +15,7 @@
             <div class="card-content">
                 <span class="card-title">Create a new account.</span>
                 <div class="row">
-                    @*@Html.ValidationSummary("", new { @class = "text-danger" })*@
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
                     <div class="input-field col s12">
                         @Html.LabelFor(m => m.FirstName, new { @class = "validate" })
                         @Html.TextBoxFor(m => m.FirstName, new { @id = "input_name", data_length = "255" })
@@ -35,6 +35,11 @@
                         @Html.LabelFor(m => m.Email, new { @class = "validate" })
                         @Html.TextBoxFor(m => m.Email)
                         @Html.ValidationMessageFor(m => m.Email)
+                    </div>
+                    <div class="input-field col s12">
+                        @Html.LabelFor(m => m.Username, new { @class = "validate" })
+                        @Html.TextBoxFor(m => m.Username)
+                        @Html.ValidationMessageFor(m => m.Username)
                     </div>
                     <div class="input-field col s12">
                         @Html.LabelFor(m => m.Password, new { @class = "validate" })
@@ -100,7 +105,6 @@
             $('input#input_surname').characterCounter();
             M.Datepicker.init(document.querySelector('.datepicker'), {
                 firstDay: 1,
-                format: 'dd mmmm yyyy',
                 yearRange: 120
             });
         });

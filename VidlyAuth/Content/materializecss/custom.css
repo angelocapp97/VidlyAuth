@@ -38,3 +38,7 @@
 .input-validation-error {
     border-bottom: 1px solid red !important;
 }
+
+.text-danger {
+    color: red;
+}

@@ -9,7 +9,7 @@
                 </div>
                 <a href="/manage"><img class="circle" src="~/Content/Images/profile-picture.jpg"></a>
                 <a href="/manage"><span class="white-text name">Hello, @User.Identity.Name!</span></a>
-                <a href="/manage"><span class="white-text email">@User.Identity.GetUserName()</span></a>
+                <a href="/manage"><span class="white-text email">&#64;@User.Identity.GetUserName()</span></a>
             </div>
         </li>
         using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
@@ -18,11 +18,21 @@
             <li><a class="waves-effect" href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
         }
     }
-    <li><a class="waves-effect" href="/account/register" id="registerLink">Register</a></li>
-    <li><a class="waves-effect" href="/account/login" id="loginLink">Login</a></li>
+    @if (!Request.IsAuthenticated)
+    {
+        <li><a class="waves-effect" href="/account/register" id="registerLink">Register</a></li>
+        <li><a class="waves-effect" href="/account/login" id="loginLink">Login</a></li>
+    }
     <li><div class="divider"></div></li>
-    <li><a class="subheader">Menu</a></li>
+    <li><a class="subheader">Pages</a></li>
     <li><a class="waves-effect" href="/"><i class="material-icons">home</i>Home</a></li>
-    <li><a class="waves-effect" href="/home/about"><i class="material-icons">people</i>About</a></li>
+    <li><a class="waves-effect" href="/home/about"><i class="material-icons">info</i>About</a></li>
     <li><a class="waves-effect" href="/home/contact"><i class="material-icons">movie</i>Contact</a></li>
+    @if (Request.IsAuthenticated)
+    {
+        <li><div class="divider"></div></li>
+        <li><a class="subheader">Menu</a></li>
+        <li><a class="waves-effect" href="/movies"><i class="material-icons">movie</i>Movies</a></li>
+        <li><a class="waves-effect" href="/customers"><i class="material-icons">people</i>Customers</a></li>
+    }
 </ul>

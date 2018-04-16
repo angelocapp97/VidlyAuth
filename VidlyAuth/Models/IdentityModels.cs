@@ -10,8 +10,15 @@ namespace VidlyAuth.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        [Required]
+        [StringLength(255)]
         public string FirstName { get; set; }
+
+        [Required]
+        [StringLength(255)]
         public string LastName { get; set; }
+
+        [Required]
         public DateTime Birthdate { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace VidlyAuth.Models
 {
+
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
@@ -49,17 +50,21 @@ namespace VidlyAuth.Models
 
     public class LoginViewModel
     {
+        //[Required]
+        //[Display(Name = "Email")]
+        //[EmailAddress]
+        //public string Email { get; set; }
+
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "Username")]
+        public string Username { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        //[Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
     }
 
@@ -85,6 +90,11 @@ namespace VidlyAuth.Models
         [DataType(DataType.Date, ErrorMessage = "Please enter a valid date format.")]
         [CustomDateTimeValid]
         public DateTime Birthdate { get; set; }
+
+        [Display(Name = "Username")]
+        [Required(ErrorMessage = "Please, insert your username.")]
+        [StringLength(255, ErrorMessage = "Username can not have more than 255 characters.")]
+        public string Username { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
