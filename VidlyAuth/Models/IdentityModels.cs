@@ -35,6 +35,7 @@ namespace VidlyAuth.Models
         public DbSet<Customer> Customers { get; set; }
         public DbSet<MembershipType> MembershipTypes { get; set; }
         public DbSet<MembershipTypeGroup> MembershipTypesGroups { get; set; }
+        public DbSet<Gender> Genders { get; set; }
 
         public ApplicationDbContext()
             : base("VidlyAuthDb", throwIfV1Schema: false)

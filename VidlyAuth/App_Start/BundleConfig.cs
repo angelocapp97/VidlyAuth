@@ -9,7 +9,7 @@ namespace VidlyAuth
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                    "~/Scripts/jquery-{version}.js"
+                    "~/Scripts/jquery-1.10.2.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/materializecss").Include(
@@ -34,6 +34,10 @@ namespace VidlyAuth
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                     "~/Scripts/bootstrap.js",
                     "~/Scripts/respond.js"
+                ));
+
+            bundles.Add(new ScriptBundle("~/bundles/bootbox").Include(
+                    "~/Scripts/bootbox.min.js"
                 ));
 
 

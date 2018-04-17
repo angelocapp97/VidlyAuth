@@ -1,0 +1,73 @@
+﻿@model VidlyAuth.ViewModels.CustomerFormViewModel
+
+<div class="container row">
+    <h2 class="header">@Model.Title</h2>
+    <div class="row">
+        <div class="col m8">
+            @using (Html.BeginForm("save", "customers"))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.Id)
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">@Model.Title</span>
+                        <div class="row">
+                            <div class="input-field col s12 m6">
+                                @Html.LabelFor(m => m.FirstName, new { @class = "validate" })
+                                @Html.TextBoxFor(m => m.FirstName)
+                                @Html.ValidationMessageFor(m => m.FirstName)
+                            </div>
+                            <div class="input-field col s12 m6">
+                                @Html.LabelFor(m => m.LastName, new { @class = "validate" })
+                                @Html.TextBoxFor(m => m.LastName)
+                                @Html.ValidationMessageFor(m => m.LastName)
+                            </div>
+                            <div class="input-field col s12 m4">
+                                @Html.DropDownListFor(m => m.GenderId, new SelectList(Model.GendersListItems, "Id", "Name"))
+                                @Html.LabelFor(m => m.GenderId, new { @class = "validate" })
+                                @Html.ValidationMessageFor(m => m.GenderId)
+                            </div>
+                            <div class="input-field col s12 m8">
+                                @Html.DropDownListFor(m => m.MembershipTypeId, Model.MembershipTypesListItems)
+                                @Html.LabelFor(m => m.MembershipTypeId, new { @class = "validate" })
+                                @Html.ValidationMessageFor(m => m.MembershipTypeId)
+                            </div>
+                            <div class="input-field col m8">
+                                @Html.LabelFor(m => m.Birthdate)
+                                @Html.TextBoxFor(m => m.Birthdate, "{0:MMM d, yyyy}", new { @class = "datepicker" })
+                                @Html.ValidationMessageFor(m => m.Birthdate)
+                            </div>
+                            <div class="input-field col s12 m8">
+                                <label>
+                                    <input name="IsSubscribedToNewsletter" type="checkbox" class="filled-in" checked="checked" value="true" />
+                                    <span>Subscribe to Newsletter?</span>
+                                </label>
+                                <input name="IsSubscribedToNewsletter" type="hidden" value="false" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        <button type="submit" class="btn btn-success">
+                            Save
+                        </button>
+                        <a href="/customers" class="btn btn-danger">Cancel</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(function () {
+            $('select').formSelect();
+            $('.datepicker').datepicker({
+                firstDay: 1,
+                yearRange: 120,
+                defaultDate: Date.now()
+            });
+        });
+    </script>
+}
+

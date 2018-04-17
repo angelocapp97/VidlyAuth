@@ -16,7 +16,7 @@ namespace VidlyAuth.Models
                 return new ValidationResult("Birthdate is required.");
 
             var today = DateTime.Today;
-            var birthdate = customer.Birthdate.Value;
+            var birthdate = customer.Birthdate;
 
             var age = today.Year - birthdate.Year;
 
