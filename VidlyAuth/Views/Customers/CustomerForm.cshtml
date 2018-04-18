@@ -10,7 +10,18 @@
                 @Html.HiddenFor(m => m.Id)
                 <div class="card">
                     <div class="card-content">
-                        <span class="card-title">@Model.Title</span>
+                        <span class="card-title">
+                            Customer Info
+                            @if (Model.Id != 0)
+                            {
+                                <a class="dropdown-trigger right" href="javascript:void(0)" data-target="moreopt-dropdown">
+                                    <i class="material-icons">more_vert</i>
+                                </a>
+                            }
+                        </span>
+                        <ul id="moreopt-dropdown" class="dropdown-content">
+                            <li><a href="javascript:void(0)" class="js-delete">Delete</a></li>
+                        </ul>
                         <div class="row">
                             <div class="input-field col s12 m6">
                                 @Html.LabelFor(m => m.FirstName, new { @class = "validate" })
@@ -58,6 +69,17 @@
     </div>
 </div>
 
+<div id="deleteModal" class="modal">
+    <div class="modal-content">
+        <h4>Deleting customer...</h4>
+        <p>Are you sure you want to delete this customer?</p>
+    </div>
+    <div class="modal-footer">
+        <a href="javascript:void(0)" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+        <a href="javascript:void(0)" data-customer-id="@Model.Id" class="js-modal-delete modal-action modal-close waves-effect waves-green btn-flat">Delete</a>
+    </div>
+</div>
+
 @section scripts {
     <script>
         $(function () {
@@ -66,6 +88,26 @@
                 firstDay: 1,
                 yearRange: 120,
                 defaultDate: Date.now()
+            });
+            $(".dropdown-trigger").dropdown();
+
+            $("#moreopt-dropdown").on('click', '.js-delete', function () {
+                let deleteModal = M.Modal.init(document.querySelector('#deleteModal'));
+                deleteModal.open();
+            });
+
+            $("#deleteModal").on('click', '.js-modal-delete', function () {
+                let id = $(this).data('customer-id');
+                $.ajax({
+                    url: "/api/customers/" + id,
+                    type: "DELETE",
+                    success: function () {
+                        window.location.href = "/customers";
+                    },
+                    error: function () {
+                        M.toast({ html: 'Error while deleting this customer. Try later' });
+                    }
+                });
             });
         });
     </script>

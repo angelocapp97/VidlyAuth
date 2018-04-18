@@ -19,7 +19,6 @@
                         <th>Gender</th>
                         <th>Membership Type</th>
                         <th>Subscribed</th>
-                        <th></th>
                         </thead>
                         <tbody></tbody>
                     </table>
@@ -35,72 +34,10 @@
     </a>
 </div>
 
-<div id="deleteModal" class="modal">
-    <div class="modal-content">
-        <h4>Deleting customer...</h4>
-        <p>Are you sure you want to delete this customer?</p>
-    </div>
-    <div class="modal-footer">
-        <a href="javascript:void(0)" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
-        <a @*href="/customers/delete"*@ class="js-modal-delete modal-action modal-close waves-effect waves-green btn-flat">Delete</a>
-    </div>
-</div>
-
 @section scripts {
     <script>
         $(function () {
             $('.fixed-action-btn').floatingActionButton();
-            //$('.modal').modal({
-            //    onCloseStart: (callback) => {
-            //        console.log(`Modal closed`);
-            //        console.log(callback);
-            //    }
-            //});
-            var deleteModal = $('.modal').modal();
-
-            $(document).on({
-                load: function () {
-                    console.log("load");
-                },
-                mouseenter: function () {
-                    $(this).find('.actions').fadeIn(100);
-                },
-                mouseleave: function () {
-                    $(this).find('.actions').fadeOut(100);
-                }
-            }, '.table tbody tr');
-
-            //var datatable = $("#customers").DataTable({
-            //    ajax: {
-            //        url: "/api/customers/",
-            //        dataSrc: ""
-            //    },
-            //    columns: [
-            //        {
-            //            className: "col m6 mdl-data-table__cell--non-numeric",
-            //            data: "firstName"
-            //        },
-            //        {
-            //            className: "col m4 mdl-data-table__cell--non-numeric",
-            //            data: "membershipType.name"
-            //        },
-            //        {
-            //            className: "col m2 mdl-data-table__cell--non-numeric",
-            //            orderable: false,
-            //            data: "id",
-            //            render: function (data) {
-            //                return `<div class="actions" style="display: none">
-            //                                <a href="/customers/edit/${data}">
-            //                                    <i class="material-icons">mode_edit</i>
-            //                                </a>
-            //                                <a href="javascript:void(0)" class="js-delete" data-customer-id="${data}">
-            //                                    <i class="material-icons">delete</i>
-            //                                </a>
-            //                            </div>`;
-            //            }
-            //        }
-            //    ]
-            //});
 
             $.ajax({
                 url: '/api/customers',
@@ -122,22 +59,12 @@
                             }
 
                             tbody.append(`
-                            <tr>
+                            <tr data-customer-id="${item.id}">
                                 <td>${item.firstName} ${item.lastName}</td>
                                 <td>${birthdate.getDate()}/${birthdate.getMonth() + 1}/${birthdate.getFullYear()}</td>
                                 <td>${item.gender.name}</td>
                                 <td>${item.membershipType.name}</td>
                                 <td>${checkbox}</td>
-                                <td>
-                                    <div class="actions" style="display: none">
-                                        <a href="/customers/edit/${item.id}">
-                                            <i class="material-icons">mode_edit</i>
-                                        </a>
-                                        <a class="js-delete" href="javascript:void(0)" data-customer-id="${item.id}">
-                                            <i class="material-icons">delete</i>
-                                        </a>
-                                    </div>
-                                </td>
                             </tr>
                             `);
                         });
@@ -151,28 +78,9 @@
                 }
             });
 
-            var selectedRow;
-            $("#customers").on("click", ".js-delete", function () {
-                let button = $(this);
-                selectedRow = $(this).parents('tr');
-                let deleteModal = M.Modal.init(document.querySelector('.modal'));
-                $('.modal').find('.js-modal-delete').data('customer-id', button.attr('data-customer-id'));
-                deleteModal.open();
-            });
-
-            $('.modal').on('click', '.js-modal-delete', function () {
-                var button = $(this);
-                $.ajax({
-                    url: "/api/customers/" + button.data("customer-id"),
-                    type: "DELETE",
-                    success: function () {
-                        selectedRow.remove();
-                        M.toast({ html: 'Customer deleted correctly' });
-                        if ($("#customers").children('tbody').html().trim() === '') {
-                            $("#customers").html('<center>No customers found</center>');
-                        }
-                    }
-                });
+            $("#customers").on('click', 'tr', function () {
+                let id = $(this).data('customer-id');
+                window.location.href = `/customers/edit/${id}`;
             });
         });
     </script>

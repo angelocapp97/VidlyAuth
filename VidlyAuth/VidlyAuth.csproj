@@ -435,6 +435,7 @@
     <Content Include="Content\materializecss\custom.css" />
     <Content Include="Content\materializecss\js\materialize.js" />
     <Content Include="Content\materializecss\js\materialize.min.js" />
+    <Content Include="Content\perfect-scrollbar.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -536,6 +537,10 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\perfect-scrollbar.common.js" />
+    <Content Include="Scripts\perfect-scrollbar.esm.js" />
+    <Content Include="Scripts\perfect-scrollbar.js" />
+    <Content Include="Scripts\perfect-scrollbar.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Web.config" />

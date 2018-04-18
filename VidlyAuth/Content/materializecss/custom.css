@@ -42,3 +42,15 @@
 .text-danger {
     color: red;
 }
+
+.material-icons {
+    color: #2BBBAD !important;
+}
+
+.btn-large > .material-icons {
+    color: #ffffff !important;
+}
+
+a:focus {
+    outline: none;
+}
