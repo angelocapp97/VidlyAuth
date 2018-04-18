@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewBag.Title = "Customers";
+}
+
+<div class="container row">
+    <h2 class="header">@ViewBag.Title</h2>
+
+    <div class="row">
+        <div class="col s12">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">Customers</span>
+
+                    <table id="customers" class="highlight centered responsive-table">
+                        <thead>
+                        <th>Name</th>
+                        <th>Birthdate</th>
+                        <th>Gender</th>
+                        <th>Membership Type</th>
+                        <th>Subscribed</th>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(function () {
+            $('.fixed-action-btn').floatingActionButton();
+
+            $.ajax({
+                url: '/api/customers',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    let tbody = $("#customers").find('tbody');
+
+                    if (data.length > 0) {
+                        $.each(data, (index, item) => {
+                            let birthdate = new Date(item.birthdate);
+                            let checkbox = '';
+
+                            if (item.isSubscribedToNewsLetter == true) {
+                                checkbox = '<input type="checkbox" class="filled-in" checked="checked" /><span>&nbsp</span>';
+                            }
+                            else {
+                                checkbox = '<input type="checkbox" class="filled-in" /><span>&nbsp</span>';
+                            }
+
+                            tbody.append(`
+                            <tr data-customer-id="${item.id}">
+                                <td>${item.firstName} ${item.lastName}</td>
+                                <td>${birthdate.getDate()}/${birthdate.getMonth() + 1}/${birthdate.getFullYear()}</td>
+                                <td>${item.gender.name}</td>
+                                <td>${item.membershipType.name}</td>
+                                <td>${checkbox}</td>
+                            </tr>
+                            `);
+                        });
+                    }
+                    else {
+                        tbody.parent().html('<center>No customers found</center>');
+                    }
+                },
+                error: function (e) {
+                    console.log(`Error: ${e}`);
+                }
+            });
+
+            $("#customers").on('click', 'tr', function () {
+                let id = $(this).data('customer-id');
+                window.location.href = `/customers/edit/${id}`;
+            });
+        });
+    </script>
+}

@@ -22,9 +22,13 @@ namespace VidlyAuth.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-            return View();
+            if (User.IsInRole(RoleName.CanManageCustomers))
+                return View();
+
+            return View("ReadOnlyIndex");
         }
 
+        [Authorize(Roles = RoleName.CanManageCustomers)]
         public ActionResult New()
         {
             var genders = _context.Genders.ToList();
@@ -49,7 +53,10 @@ namespace VidlyAuth.Controllers
             var membershipTypes = _context.MembershipTypes.Include(m => m.MembershipTypeGroup).ToList();
             var viewModel = new CustomerFormViewModel(customer, membershipTypes, genders);
 
-            return View("CustomerForm", viewModel);
+            if (User.IsInRole(RoleName.CanManageCustomers))
+                return View("CustomerForm", viewModel);
+
+            return View("ReadOnlyCustomerForm", viewModel);
         }
 
         [HttpPost]

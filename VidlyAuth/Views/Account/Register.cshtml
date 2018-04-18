@@ -28,7 +28,7 @@
                     </div>
                     <div class="input-field col s12">
                         @Html.LabelFor(m => m.Birthdate, new { @class = "validate" })
-                        @Html.TextBoxFor(m => m.Birthdate, new { @class = "datepicker" })
+                        @Html.TextBoxFor(m => m.Birthdate, new { @class = "datepicker", @readonly = true })
                         @Html.ValidationMessageFor(m => m.Birthdate)
                     </div>
                     <div class="input-field col s12">
